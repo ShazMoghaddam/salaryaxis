@@ -1,0 +1,26 @@
+title,salary,region,experience,gender
+Software Engineer,58000,London,senior,M
+Software Engineer,49000,London,senior,F
+Product Manager,72000,London,mid,M
+Product Manager,61000,London,mid,F
+Data Analyst,38000,Manchester,junior,M
+Data Analyst,35000,Manchester,junior,F
+UX Designer,54000,London,mid,F
+UX Designer,56000,London,mid,M
+HR Manager,48000,Birmingham,senior,F
+HR Manager,52000,Birmingham,senior,M
+Marketing Manager,45000,London,mid,F
+Sales Executive,32000,Leeds,junior,M
+Sales Executive,28000,Leeds,junior,F
+Finance Manager,62000,London,senior,M
+Finance Manager,55000,London,senior,F
+Data Scientist,67000,London,senior,M
+Data Scientist,58000,London,senior,F
+Project Manager,51000,Manchester,mid,M
+Project Manager,46000,Manchester,mid,F
+Customer Service,24000,Bristol,junior,F
+Customer Service,26000,Bristol,junior,M
+Software Engineer,42000,Edinburgh,mid,F
+Software Engineer,44000,Edinburgh,mid,M
+Operations Manager,58000,London,senior,M
+HR Administrator,26000,Birmingham,junior,F
