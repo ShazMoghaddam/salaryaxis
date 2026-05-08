@@ -1,0 +1,70 @@
+# =============================================================================
+# docker-compose.prod.yml — Production stack
+# =============================================================================
+# Runs the full production stack:
+#   nginx   — reverse proxy, SSL termination, static file serving
+#   api     — Gunicorn/Flask backend (built React frontend baked in)
+#
+# Usage:
+#   docker compose -f docker-compose.prod.yml up -d
+#
+# Before running:
+#   1. Copy .env.example → .env and fill in real values
+#   2. Place your SSL certs in nginx/certs/ (or use certbot volume below)
+#   3. Run: docker compose -f docker-compose.prod.yml up --build -d
+# =============================================================================
+
+services:
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    image: ${ECR_REGISTRY}/${ECR_REPOSITORY}:latest
+    container_name: salaryaxis_api
+    expose:
+      - "8000"                 # only accessible to nginx, not the host
+    env_file:
+      - .env
+    environment:
+      FLASK_ENV: production
+      PORT: "8000"
+    volumes:
+      - salary_output:/app/output
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+    networks:
+      - internal
+
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: salaryaxis_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro          # SSL certificates
+      - nginx_cache:/var/cache/nginx
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: always
+    networks:
+      - internal
+
+volumes:
+  salary_output:
+    driver: local
+  nginx_cache:
+    driver: local
+
+networks:
+  internal:
+    driver: bridge

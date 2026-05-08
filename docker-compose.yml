@@ -1,0 +1,53 @@
+# =============================================================================
+# docker-compose.yml — Local development
+# =============================================================================
+# Starts the Flask API with hot reload.
+# The React frontend runs separately via 'npm run dev' (Vite proxy handles /api).
+#
+# Usage:
+#   docker compose up              # start API in Docker
+#   cd frontend && npm run dev     # start React in terminal
+#
+# The Vite dev server at http://localhost:3000 proxies /api → http://localhost:8080
+# =============================================================================
+
+services:
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime          # use only the Python stage (skip React build)
+    image: salaryaxis:dev
+    container_name: salaryaxis_api
+    ports:
+      - "5000:8000"            # host:8080 → container:8000
+    environment:
+      FLASK_ENV: development
+      LOG_LEVEL: DEBUG
+      PORT: "8000"
+      GUNICORN_WORKERS: "1"   # 1 worker in dev for simpler debugging
+      GUNICORN_TIMEOUT: "120"
+      FORCE_PIPELINE_REFRESH: "false"
+    volumes:
+      # Mount source for hot reload (code changes reflected without rebuild)
+      - .:/app
+      # Persist ONS API cache between container restarts
+      - salary_cache:/app/output
+    command: >
+      gunicorn
+        --config gunicorn.conf.py
+        --reload
+        --reload-extra-file config.py
+        wsgi:app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s       # allow DataService to initialise on first boot
+
+volumes:
+  salary_cache:
+    driver: local
