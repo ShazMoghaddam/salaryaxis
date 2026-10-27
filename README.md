@@ -5,11 +5,15 @@ deployable to AWS or GCP, and fully GDPR-compliant.
 
 Developed by **[Shaz Moghaddam](https://shazmoghaddam.github.io)** · London, UK
 
-[![CI](https://github.com/ShazMoghaddam/salaryaxis/actions/workflows/ci.yml/badge.svg)](https://github.com/ShazMoghaddam/salaryaxis/actions)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://python.org)
 [![React 18](https://img.shields.io/badge/react-18-61DAFB.svg)](https://reactjs.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![GDPR Compliant](https://img.shields.io/badge/GDPR-compliant-green.svg)](#gdpr-compliance)
+
+> **Repository status:** this repo currently holds the configuration, entry points and
+> documentation only. The application source (`api/`, `data/`, `pipeline/`, `frontend/`,
+> `tests/`, `deploy/`) and the CI workflows are being restored and will be added in a
+> later release. Until then, the Quick Start below will not run from a fresh clone.
 
 ---
 
@@ -61,7 +65,7 @@ make dev-api            # Terminal 1: Flask :8080
 make dev-ui             # Terminal 2: React :3000
 ```
 
-See **[deploy/DEPLOYMENT.md](deploy/DEPLOYMENT.md)** for Docker and cloud deployment.
+These steps need the full application source, which is being restored (see the status note above).
 
 ---
 
@@ -85,16 +89,16 @@ See **[deploy/DEPLOYMENT.md](deploy/DEPLOYMENT.md)** for Docker and cloud deploy
 
 ## Project Structure
 
+What is in this repository today:
+
 ```
 salaryaxis/
-├── config.py / main.py / wsgi.py / gunicorn.conf.py / Makefile
-├── data/           ons_fetcher.py · cpi_fetcher.py · sources/paid_sources.py
-├── pipeline/       processor.py · analyser.py · benchmarker.py · gender_analyser.py
-├── api/            __init__.py · middleware/ · services/ · routes/
-├── frontend/src/   context/ · components/ · hooks/ · pages/ · services/
-├── tests/          232 tests — all passing ✓
-├── deploy/         DEPLOYMENT.md · aws/ · gcp/ · setup/
-└── .github/        ci.yml · deploy-aws.yml · deploy-gcp.yml
+├── config.py · main.py · wsgi.py · gunicorn.conf.py · __init__.py
+├── Makefile · requirements.txt
+├── Dockerfile · docker-compose.yml · docker-compose.prod.yml
+├── salaryaxis_demo_org.csv
+├── SalaryAxis-ExecutiveSummary.pdf · SalaryAxis-PitchDeck.pptx
+└── README.md · CHANGELOG.md · LICENSE
 ```
 
 ---
