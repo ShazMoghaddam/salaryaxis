@@ -8,6 +8,18 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- GitHub Actions CI workflow (`.github/workflows/ci.yml`) on Python 3.12: installs
+  requirements, compiles all Python files, lints for errors with ruff, loads `config.py`,
+  and validates the Docker Compose files and demo CSV. Test suite and Docker build jobs
+  to follow once the application source is restored.
+- CI status badge in the README.
+
+---
+
 ## [1.0.0] — 2026 — Initial Release
 
 ### Phase 7 — GDPR Compliance & Paid Source Integration
