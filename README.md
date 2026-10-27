@@ -5,6 +5,7 @@ deployable to AWS or GCP, and fully GDPR-compliant.
 
 Developed by **[Shaz Moghaddam](https://shazmoghaddam.github.io)** · London, UK
 
+[![CI](https://github.com/ShazMoghaddam/salaryaxis/actions/workflows/ci.yml/badge.svg)](https://github.com/ShazMoghaddam/salaryaxis/actions/workflows/ci.yml)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://python.org)
 [![React 18](https://img.shields.io/badge/react-18-61DAFB.svg)](https://reactjs.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -12,8 +13,9 @@ Developed by **[Shaz Moghaddam](https://shazmoghaddam.github.io)** · London, UK
 
 > **Repository status:** this repo currently holds the configuration, entry points and
 > documentation only. The application source (`api/`, `data/`, `pipeline/`, `frontend/`,
-> `tests/`, `deploy/`) and the CI workflows are being restored and will be added in a
-> later release. Until then, the Quick Start below will not run from a fresh clone.
+> `tests/`, `deploy/`) is being restored and will be added in a later release. Until then,
+> the Quick Start below will not run from a fresh clone. CI currently checks the files that
+> are here (Python compiles, config loads, Compose files and demo data are valid).
 
 ---
 
@@ -96,6 +98,7 @@ salaryaxis/
 ├── config.py · main.py · wsgi.py · gunicorn.conf.py · __init__.py
 ├── Makefile · requirements.txt
 ├── Dockerfile · docker-compose.yml · docker-compose.prod.yml
+├── .github/workflows/ci.yml
 ├── salaryaxis_demo_org.csv
 ├── SalaryAxis-ExecutiveSummary.pdf · SalaryAxis-PitchDeck.pptx
 └── README.md · CHANGELOG.md · LICENSE
